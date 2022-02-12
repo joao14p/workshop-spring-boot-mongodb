@@ -21,7 +21,7 @@ public class UserService {
 	}
 	
 	public User findById(String id) {
-		User user = repo.findOne(id);
+		User user = this.repo.findById(id).orElse(null);
 		if(user == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado");
 		}
@@ -38,7 +38,7 @@ public class UserService {
 	}
 	
 	public User update(User obj) {
-		User newObj = repo.findById(obj.getId());
+		User newObj = repo.findById(obj.getId()).orElse(null);
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
